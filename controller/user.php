@@ -9,7 +9,7 @@ class User extends CI_Controller {
 // Call the Model constructor
         parent::__construct();
         $this->load->helper('url');
-        $this->load->model('nj_user');
+        $this->load->model('usermodel');
         $this->load->library("session");
         $username = $this->session->userdata('username');
         if (empty($username)) {
@@ -44,7 +44,8 @@ class User extends CI_Controller {
         $searchterm = $this->searchterm_handler($_POST, TRUE);
         $config = array();
         $config["base_url"] = $this->config->base_url() . "user/searh";
-        $config["total_rows"] = $this->nj_user->count_search($searchterm);
+        $config["total_rows"] = $this->
+            ->count_search($searchterm);
         $config["per_page"] = 3;
         $config["uri_segment"] = 3;
         $choice = $config["total_rows"] / $config["per_page"];
@@ -92,7 +93,7 @@ class User extends CI_Controller {
         $this->pagination->initialize($config);
         $page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
 //searching… //
-        $data['result'] = $this->nj_user->get_search($searchterm, $page, $config["per_page"]);
+        $data['result'] = $this->usermodel->get_search($searchterm, $page, $config["per_page"]);
 //end searching…//
         $data["link"] = $this->pagination->create_links();
         $data['hms'] = $page;
