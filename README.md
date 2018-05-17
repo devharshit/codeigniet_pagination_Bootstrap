@@ -1,2 +1,2 @@
-# Codeigniet pagination Bootstrap
+# CodeIgniter pagination with Bootstrap
 include Bootstrap Paginationin codeigniter project
